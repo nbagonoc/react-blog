@@ -4,11 +4,25 @@ import { postsAPI } from '../API.js'
 // import authenticator from '../../utils/authenticator.js'
 
 const getPosts = async () => {
-    const response = await axios.get(`${postsAPI}`)
-    if (response.data.success === false) throw new Error(response.data.message)
-    return response.data
+    try {
+        const response = await axios.get(`${postsAPI}`)
+        return response.data
+    } catch (error) {
+        const message = error.response.data.message;
+        throw new Error(message)
+    }
 }
 
-const postService = { getPosts }
+const getPost = async (id) => {
+    try {
+        const response = await axios.get(`${postsAPI}/${id}`)
+        return response.data
+    } catch (error) {
+        const message = error.response.data.message;
+        throw new Error(message);
+    }
+}
+
+const postService = { getPosts, getPost }
 
 export default postService
