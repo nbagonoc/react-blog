@@ -1,1 +1,0 @@
-export const API = 'http://localhost:5100/api/posts'
