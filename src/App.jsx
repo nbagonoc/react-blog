@@ -1,13 +1,24 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+
+import Navigation from './components/navigation/Navigation'
+
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Register from './pages/Register'
+
 import './App.css'
 
 function App() {
 
   return (
-    <>
-        <h1 className='text-xl font-bold uppercase text-center text-blue-500 mt-10'>
-            hello tailwind
-        </h1>
-    </>
+    <BrowserRouter>
+        <Navigation />
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+        </Routes>
+    </BrowserRouter>
   )
 }
 
