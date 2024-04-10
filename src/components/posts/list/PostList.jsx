@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getPosts, reset } from '../../../service/posts/postsSlice'
+import { getPosts, reset } from '../../../redux/posts/postsSlice'
 
 import PostDetails from './PostDetails'
 
