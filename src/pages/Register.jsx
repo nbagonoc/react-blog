@@ -1,6 +1,8 @@
+import AuthsRegisterForm from '../components/auths/register/AuthsRegisterForm'
+
 const Register = () => {
   return (
-    <h1 className="text-green-800 font-bold">Register</h1>
+    <AuthsRegisterForm />
   )
 }
 
