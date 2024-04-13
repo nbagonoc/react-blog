@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { postsAPI } from '../API.js'
-// import authenticator from '../../utils/authenticator.js'
+import authenticator from '../../utils/authenticator.js'
 
 const getPosts = async () => {
     try {
@@ -23,6 +23,48 @@ const getPost = async (id) => {
     }
 }
 
-const postService = { getPosts, getPost }
+const createPost = async (req) => {
+    try {
+        const response = await authenticator
+            .setAuthorization
+            .post(`${postsAPI}`, req.data)
+        return response.data.message
+    } catch (error) {
+        const message = error.response.data.message;
+        throw new Error(message);
+    }
+}
+
+const updatePost = async (id, data) => {
+    try {
+        const response = await authenticator
+            .setAuthorization
+            .put(`${postsAPI}/${id}`, data)
+        return response.data.message
+    } catch (error) {
+        const message = error.response.data.message;
+        throw new Error(message);
+    }
+}
+
+const deletePost = async (id) => {
+    try {
+        const response = await authenticator
+            .setAuthorization
+            .delete(`${postsAPI}/${id}`)
+        return response.data.message
+    } catch (error) {
+        const message = error.response.data.message;
+        throw new Error(message);
+    }
+}
+
+const postService = {
+    getPosts,
+    getPost,
+    createPost,
+    updatePost,
+    deletePost
+}
 
 export default postService
