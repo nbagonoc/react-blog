@@ -9,7 +9,8 @@ const unSetStorage = () => localStorage.removeItem('token')
 
 const setUser = () => {
     const payload = getStorage ? jwtDecode(getStorage) : null
-    const user = payload !== null ? { firstName: payload.firstName, role: payload.role } : null
+    const user = payload !== null ? { firstName: payload.firstName, role: payload.role, token: getStorage } : null
+    console.log(user)
     return user
 }
 

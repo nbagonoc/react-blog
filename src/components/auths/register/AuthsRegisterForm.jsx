@@ -5,7 +5,7 @@ import { register } from '../../../redux/auths/authsSlice'
 
 const AuthsRegisterForm = () => {
     const dispatch = useDispatch()
-    const { isLoading, isError, isSuccess, message } = useSelector((state) => state.posts)
+    const { isLoading, isError, isSuccess, message } = useSelector((state) => state.auths)
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',
