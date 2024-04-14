@@ -1,28 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 
-import { updatePost, reset } from '../../../redux/posts/postsSlice';
+import { getPost, updatePost, reset } from '../../../redux/posts/postsSlice';
 
 const PostEditForm = () => {
+    const { id  }  = useParams()
     const dispatch = useDispatch()
-    const { post, isLoading, isError, isSuccess, message } = useSelector((state) => state.posts);
+    const { post, isLoading, isError, isSuccess, message } = useSelector((state) => state.posts)
     const [formData, setFormData] = useState({
-        title: post.title,
-        content: post.content,
+        title: '',
+        content: '',
     });
 
-    // const handleOnChange = (e) => {
-    //     setFormData({
-    //         ...formData,
-    //         [e.target.name]: e.target.value,
-    //     });
-    // }
+    useEffect(() => {
+        dispatch(getPost(id))
+    }, [dispatch, id])
+
+    useEffect(() => {
+        if (post) {
+            setFormData({
+                title: post.title || '',
+                content: post.content || '',
+            });
+        }
+    }, [post, dispatch])
 
     const handleOnChange = (e) => {
-        setFormData((prevState) => ({
-            ...prevState,
+        setFormData({
+            ...formData,
             [e.target.name]: e.target.value,
-        }));
+        });
     }
 
     const handleSubmit = (e) => {
@@ -31,7 +39,7 @@ const PostEditForm = () => {
             title: formData.title,
             content: formData.content,
         };
-        dispatch(updatePost(postData));
+        dispatch(updatePost(id, postData));
         setFormData({
             title: '',
             content: '',

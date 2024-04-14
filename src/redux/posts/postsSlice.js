@@ -31,7 +31,13 @@ export const createPost = createAsyncThunk('posts/createPost', async (req, thunk
 
 export const updatePost = createAsyncThunk('posts/updatePost', async (req, thunkAPI) => {
     try {
-        await postService.updatePost(req)
+        await postService.updatePost(req.id, req.data)
+        const state = thunkAPI.getState()
+        const findToUpdatePost = state.posts.posts.find(post => post._id === req.id)
+        if(findToUpdatePost) {
+            findToUpdatePost.title = req.data.title
+            findToUpdatePost.content = req.data.content
+        }
         return 'Post udpated successfully'
     } catch (error) {
         const message = error

@@ -17,9 +17,10 @@ const PostDetails = ({ post }) => {
                 <h1>{post.title}</h1>
             </Link>
             <p>{post.body}</p>
-            <button
-                onClick={() => handleOnDelete(post._id) }
-            >
+            <Link to={`/edit/${post._id}`}>
+                <h1>Edit</h1>
+            </Link>
+            <button onClick={() => handleOnDelete(post._id) }>
                 Delete
             </button>
         </div>

@@ -1,5 +1,5 @@
 Need to:
-- Add Styling
+- Add Styling via bootstrap
 - Edit Blog Post
 - Update returns of backend
     - Edit: Should return the new data of the edited
