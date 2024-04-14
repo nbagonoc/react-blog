@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import Navigation from './components/navigation/Navigation'
 
@@ -11,22 +12,31 @@ import Dashboard from './pages/Dashboard'
 
 import './App.css'
 
-
 function App() {
+    const { user } = useSelector(state => state.auths)
 
-  return (
-    <BrowserRouter>
-        <Navigation />
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/view/:id" element={<View />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-    </BrowserRouter>
-  )
+    return (
+        <BrowserRouter>
+            <Navigation />
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route
+                    path='/create'
+                    element={user ? <Create /> : <Navigate to='/login' />}
+                />
+                <Route path='/view/:id' element={<View />} />
+                <Route
+                    path='/login'
+                    element={user ? <Navigate to='/dashboard' /> : <Login />}
+                />
+                <Route path='/register' element={<Register />} />
+                <Route
+                    path='/dashboard'
+                    element={user ? <Dashboard /> : <Navigate to='/login' />}
+                />
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
 export default App

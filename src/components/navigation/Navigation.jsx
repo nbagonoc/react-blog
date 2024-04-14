@@ -24,13 +24,13 @@ const Navigation = () => {
                             Home
                         </Link>
                     </li>
-                    <li>
-                        <Link to='/create' className="text-white hover:text-gray-300">
-                            Create
-                        </Link>
-                    </li>
                     {user && (
                         <>
+                            <li>
+                                <Link to='/create' className="text-white hover:text-gray-300">
+                                    Create
+                                </Link>
+                            </li>
                             <li>
                                 <Link to='/dashboard' className="text-white hover:text-gray-300">
                                     Dashboard
