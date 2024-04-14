@@ -21,7 +21,13 @@ export const getPostsByUser = createAsyncThunk('posts/getPostsByUser', async (id
 
 export const createPost = createAsyncThunk('posts/createPost', async (req, thunkAPI) => {
     try {
-        await postService.createPost(req)
+        const response = await postService.createPost(req)
+        const state = thunkAPI.getState()
+        const newPost = response
+
+        thunkAPI.dispatch(setPosts([...state.posts.posts, newPost]))
+        thunkAPI.dispatch(setPostsByUser([...state.posts.postsByUser, newPost]))
+
         return 'Post created successfully'
     } catch (error) {
         const message = error

@@ -16,7 +16,6 @@ const getPosts = async () => {
 const getPostsByUserId = async (id) => {
     try {
         const response = await axios.get(`${postsAPI}/user/${id}`)
-        // console.log(response)
         return response.data
     } catch (error) {
         const message = error.response.data.message;
@@ -39,7 +38,8 @@ const createPost = async (data) => {
         const response = await authenticator
             .setAuthorization
             .post(`${postsAPI}`, data)
-        return response.data.message
+        // console.log(response.data)
+        return response.data
     } catch (error) {
         const message = error.response.data.message;
         throw new Error(message);
