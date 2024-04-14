@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import postService from '../../service/posts/postsService'
 
 const initialState = {
@@ -33,11 +33,31 @@ export const updatePost = createAsyncThunk('posts/updatePost', async (req, thunk
     try {
         await postService.updatePost(req.id, req.data)
         const state = thunkAPI.getState()
-        const findToUpdatePost = state.posts.posts.find(post => post._id === req.id)
-        if(findToUpdatePost) {
-            findToUpdatePost.title = req.data.title
-            findToUpdatePost.content = req.data.content
-        }
+        
+        const updatedPostsByUser = state.posts.postsByUser.map(post => {
+            if (post._id === req.id) {
+                return {
+                    ...post,
+                    title: req.data.title,
+                    content: req.data.content
+                }
+            }
+            return post
+        })
+        thunkAPI.dispatch(setPostsByUser(updatedPostsByUser))
+
+        const updatedPosts = state.posts.posts.map(post => {
+            if (post._id === req.id) {
+                return {
+                    ...post,
+                    title: req.data.title,
+                    content: req.data.content
+                }
+            }
+            return post
+        })
+        thunkAPI.dispatch(setPosts(updatedPosts))
+
         return 'Post udpated successfully'
     } catch (error) {
         const message = error

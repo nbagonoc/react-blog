@@ -35,11 +35,11 @@ const PostEditForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const postData = {
+        const data = {
             title: formData.title,
             content: formData.content,
         };
-        dispatch(updatePost(id, postData));
+        dispatch(updatePost({id, data}));
         setFormData({
             title: '',
             content: '',
@@ -62,7 +62,7 @@ const PostEditForm = () => {
           onChange={handleOnChange}
           placeholder="Content"
         ></textarea>
-        <button type="submit">Create</button>
+        <button type="submit">Edit</button>
       </form>
     </div>
   )
