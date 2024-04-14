@@ -46,6 +46,19 @@ export const getPost = createAsyncThunk('posts/getPost', async (id, thunkAPI) =>
     }
 })
 
+export const deletePost = createAsyncThunk('posts/deletePost', async (id, thunkAPI) => {
+    try {
+        await postService.deletePost(id)
+        const state = thunkAPI.getState()
+        const updatedPostsByUser = state.posts.postsByUser.filter(post => post._id !== id)
+        thunkAPI.dispatch(setPostsByUser(updatedPostsByUser))
+        return 'Post deleted successfully'
+    } catch (error) {
+        const message = error
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 const postsSlice = createSlice({
     name: 'posts',
     initialState,
@@ -55,6 +68,9 @@ const postsSlice = createSlice({
             state.isError = false
             state.isSuccess = false
             state.message = ''
+        },
+        setPostsByUser: (state, action) => {
+            state.postsByUser = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -126,10 +142,23 @@ const postsSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
             })
+            .addCase(deletePost.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(deletePost.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.message = action.payload
+            })
+            .addCase(deletePost.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
     }
 })
 
-export const { reset } = postsSlice.actions
+export const { reset, setPostsByUser } = postsSlice.actions
 
 export default postsSlice.reducer
 
