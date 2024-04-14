@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { createPost } from '../../../redux/posts/postsSlice';
+import { createPost, reset } from '../../../redux/posts/postsSlice';
 
 const PostCreateForm = () => {
     const dispatch = useDispatch()
@@ -25,6 +25,10 @@ const PostCreateForm = () => {
             content: formData.content,
         };
         dispatch(createPost(postData));
+        setFormData({
+            title: '',
+            content: '',
+        });
     }
 
   return (

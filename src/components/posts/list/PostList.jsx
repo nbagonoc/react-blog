@@ -10,7 +10,6 @@ const PostList = () => {
 
     useEffect(() => {
         dispatch(getPosts())
-        // return () => dispatch(reset())
     }, [dispatch])
     return (
         <div>

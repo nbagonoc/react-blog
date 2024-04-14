@@ -23,11 +23,11 @@ const getPost = async (id) => {
     }
 }
 
-const createPost = async (req) => {
+const createPost = async (data) => {
     try {
         const response = await authenticator
             .setAuthorization
-            .post(`${postsAPI}`, req.data)
+            .post(`${postsAPI}`, data)
         return response.data.message
     } catch (error) {
         const message = error.response.data.message;
