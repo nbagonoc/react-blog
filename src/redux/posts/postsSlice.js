@@ -4,6 +4,7 @@ import postService from '../../service/posts/postsService'
 const initialState = {
     post: {},
     posts: [],
+    postsByUser: [],
     isLoading: false,
     isError: false,
     isSuccess: false,
@@ -12,6 +13,10 @@ const initialState = {
 
 export const getPosts = createAsyncThunk('posts/getPosts', async () => {
     return await postService.getPosts()
+})
+
+export const getPostsByUser = createAsyncThunk('posts/getPostsByUser', async (id) => {
+    return await postService.getPostsByUserId(id)
 })
 
 export const createPost = createAsyncThunk('posts/createPost', async (req, thunkAPI) => {
@@ -63,6 +68,19 @@ const postsSlice = createSlice({
                 state.isSuccess = true
             })
             .addCase(getPosts.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(getPostsByUser.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getPostsByUser.fulfilled, (state, action) => {
+                state.postsByUser = action.payload
+                state.isLoading = false
+                state.isSuccess = true
+            })
+            .addCase(getPostsByUser.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

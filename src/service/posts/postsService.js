@@ -13,6 +13,17 @@ const getPosts = async () => {
     }
 }
 
+const getPostsByUserId = async (id) => {
+    try {
+        const response = await axios.get(`${postsAPI}/user/${id}`)
+        console.log(response)
+        return response.data
+    } catch (error) {
+        const message = error.response.data.message;
+        throw new Error(message)
+    }
+}
+
 const getPost = async (id) => {
     try {
         const response = await axios.get(`${postsAPI}/${id}`)
@@ -61,6 +72,7 @@ const deletePost = async (id) => {
 
 const postService = {
     getPosts,
+    getPostsByUserId,
     getPost,
     createPost,
     updatePost,
