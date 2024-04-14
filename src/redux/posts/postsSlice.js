@@ -21,7 +21,8 @@ export const getPostsByUser = createAsyncThunk('posts/getPostsByUser', async (id
 
 export const createPost = createAsyncThunk('posts/createPost', async (req, thunkAPI) => {
     try {
-        return await postService.createPost(req)
+        await postService.createPost(req)
+        return 'Post created successfully'
     } catch (error) {
         const message = error
         return thunkAPI.rejectWithValue(message)
@@ -30,7 +31,8 @@ export const createPost = createAsyncThunk('posts/createPost', async (req, thunk
 
 export const updatePost = createAsyncThunk('posts/updatePost', async (req, thunkAPI) => {
     try {
-        return await postService.updatePost(req)
+        await postService.updatePost(req)
+        return 'Post udpated successfully'
     } catch (error) {
         const message = error
         return thunkAPI.rejectWithValue(message)
@@ -51,7 +53,9 @@ export const deletePost = createAsyncThunk('posts/deletePost', async (id, thunkA
         await postService.deletePost(id)
         const state = thunkAPI.getState()
         const updatedPostsByUser = state.posts.postsByUser.filter(post => post._id !== id)
+        const updatedPosts = state.posts.posts.filter(post => post._id !== id)
         thunkAPI.dispatch(setPostsByUser(updatedPostsByUser))
+        thunkAPI.dispatch(setPosts(updatedPosts))
         return 'Post deleted successfully'
     } catch (error) {
         const message = error
@@ -71,6 +75,9 @@ const postsSlice = createSlice({
         },
         setPostsByUser: (state, action) => {
             state.postsByUser = action.payload
+        },
+        setPosts: (state, action) => {
+            state.posts = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -86,7 +93,7 @@ const postsSlice = createSlice({
             .addCase(getPosts.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.message = action.payload
+                state.message = action.payload.message
             })
             .addCase(getPostsByUser.pending, (state) => {
                 state.isLoading = true
@@ -99,7 +106,7 @@ const postsSlice = createSlice({
             .addCase(getPostsByUser.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.message = action.payload
+                state.message = action.payload.message
             })
             .addCase(getPost.pending, (state) => {
                 state.isLoading = true
@@ -127,7 +134,7 @@ const postsSlice = createSlice({
             .addCase(createPost.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.message = action.payload
+                state.message = action.payload.message
             })
             .addCase(updatePost.pending, (state) => {
                 state.isLoading = true
@@ -140,7 +147,7 @@ const postsSlice = createSlice({
             .addCase(updatePost.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.message = action.payload
+                state.message = action.payload.message
             })
             .addCase(deletePost.pending, (state) => {
                 state.isLoading = true
@@ -153,12 +160,12 @@ const postsSlice = createSlice({
             .addCase(deletePost.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.message = action.payload
+                state.message = action.payload.message
             })
     }
 })
 
-export const { reset, setPostsByUser } = postsSlice.actions
+export const { reset, setPosts, setPostsByUser } = postsSlice.actions
 
 export default postsSlice.reducer
 
