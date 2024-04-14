@@ -17,6 +17,9 @@ const Navigation = () => {
                     <li>
                         <Link to='/register' className="text-white hover:text-gray-300">Register</Link>
                     </li>
+                    <li>
+                        <Link to='/dashboard' className="text-white hover:text-gray-300">Dashboard</Link>
+                    </li>
                 </ul>
             </div>
         </nav>

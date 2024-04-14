@@ -7,8 +7,10 @@ import Create from './pages/Create'
 import View from './pages/View'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
 
 import './App.css'
+
 
 function App() {
 
@@ -21,6 +23,7 @@ function App() {
             <Route path="/view/:id" element={<View />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
     </BrowserRouter>
   )
