@@ -5,6 +5,7 @@ import Navigation from './components/navigation/Navigation'
 
 import Home from './pages/Home'
 import Create from './pages/Create'
+import Edit from './pages/Edit'
 import View from './pages/View'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -23,6 +24,10 @@ function App() {
                 <Route
                     path='/create'
                     element={user ? <Create /> : <Navigate to='/login' />}
+                />
+                <Route
+                    path='/edit/:id'
+                    element={user ? <Edit /> : <Navigate to='/login' />}
                 />
                 <Route path='/view/:id' element={<View />} />
                 <Route
