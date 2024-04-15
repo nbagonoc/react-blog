@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { getPost, updatePost, reset } from '../../../redux/posts/postsSlice';
+import { getPost, updatePost, reset } from '../../../redux/posts/postsSlice'
 
 const PostEditForm = () => {
+    const navigate = useNavigate()
     const { id  }  = useParams()
     const dispatch = useDispatch()
     const { post, isLoading, isError, isSuccess, message } = useSelector((state) => state.posts)
     const [formData, setFormData] = useState({
         title: '',
         content: '',
-    });
+    })
 
     useEffect(() => {
         dispatch(getPost(id))
@@ -22,7 +23,7 @@ const PostEditForm = () => {
             setFormData({
                 title: post.title || '',
                 content: post.content || '',
-            });
+            })
         }
     }, [post, dispatch])
 
@@ -30,20 +31,24 @@ const PostEditForm = () => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
-        });
+        })
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         const data = {
             title: formData.title,
             content: formData.content,
-        };
-        dispatch(updatePost({id, data}));
-        setFormData({
-            title: '',
-            content: '',
-        });
+        }
+
+        try {
+            dispatch(updatePost({id, data}))
+            navigate('/dashboard')
+        } catch (error) {
+            console.log(error)
+        }
+
+
     }
 
   return (

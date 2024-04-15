@@ -16,7 +16,7 @@ const PostDetails = ({ post }) => {
             <Link to={`/view/${post._id}`}>
                 <h1>{post.title}</h1>
             </Link>
-            <p>{post.body}</p>
+            <p>{post.content}</p>
             <Link to={`/edit/${post._id}`}>
                 <h1>Edit</h1>
             </Link>
