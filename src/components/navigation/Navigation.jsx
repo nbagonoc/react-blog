@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../../redux/auths/authsSlice'
+import { resetPostsByUser } from '../../redux/posts/postsSlice'
 
 const Navigation = () => {
     const navigate = useNavigate()
@@ -11,6 +12,7 @@ const Navigation = () => {
         e.preventDefault()
         localStorage.removeItem('token')
         dispatch(logout())
+        dispatch(resetPostsByUser())
         dispatch(reset())
         navigate('/login')
     }

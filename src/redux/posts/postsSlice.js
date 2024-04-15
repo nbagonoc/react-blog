@@ -108,6 +108,9 @@ const postsSlice = createSlice({
         setPostsByUser: (state, action) => {
             state.postsByUser = action.payload
         },
+        resetPostsByUser: (state) => {
+            state.postsByUser = []
+        },
         setPosts: (state, action) => {
             state.posts = action.payload
         }
@@ -197,7 +200,7 @@ const postsSlice = createSlice({
     }
 })
 
-export const { reset, setPosts, setPostsByUser } = postsSlice.actions
+export const { reset, setPosts, setPostsByUser, resetPostsByUser } = postsSlice.actions
 
 export default postsSlice.reducer
 
