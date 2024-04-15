@@ -3,7 +3,7 @@ import axios from "axios"
 
 const getStorage = localStorage.getItem('token')
 
-const setStorage = res => localStorage.setItem('token', res)
+const setStorage = token => localStorage.setItem('token', token)
 
 const unSetStorage = () => localStorage.removeItem('token')
 

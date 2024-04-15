@@ -1,15 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { login } from '../../../redux/auths/authsSlice'
+import { login, reset } from '../../../redux/auths/authsSlice'
 
 const AuthsLoginForm = () => {
     const dispatch = useDispatch()
-    const { isLoading, isError, isSuccess, message } = useSelector((state) => state.posts)
+    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auths)
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     })
+
+    useEffect(() => {
+        dispatch(reset())
+    }, [dispatch])
 
     const handleOnChange = (e) => {
         setFormData({

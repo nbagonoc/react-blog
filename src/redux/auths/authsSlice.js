@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { jwtDecode } from 'jwt-decode'
 import authsService from '../../service/auths/authsService'
 import authenticator from '../../utils/authenticator';
 
 const initialState = {
-    user: authenticator.setUser() ? authenticator.setUser() : null,
+
+    user: authenticator.setUser(),
     isLoading: false,
     isError: false,
     isSuccess: false,
@@ -12,7 +14,13 @@ const initialState = {
 
 export const login = createAsyncThunk('auths/login', async (req, thunkAPI) => {
     try {
-        return await authsService.login(req)
+        const response = await authsService.login(req)
+        localStorage.setItem('token', response.data.token)
+        const token = localStorage.getItem('token')
+        const decodedToken = jwtDecode(token)
+        const user = decodedToken !== null ? { id: decodedToken._id, firstName: decodedToken.firstName, role: decodedToken.role } : null
+
+        return user
     } catch (error) {
         const message = error
         return thunkAPI.rejectWithValue(message)
