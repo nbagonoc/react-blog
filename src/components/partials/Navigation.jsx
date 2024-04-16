@@ -3,10 +3,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../../redux/auths/authsSlice'
 import { resetPostsByUser } from '../../redux/posts/postsSlice'
 
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
+
 const Navigation = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { user } = useSelector(state => state.auths)
+    const { user } = useSelector((state) => state.auths)
 
     const handleOnLogout = (e) => {
         e.preventDefault()
@@ -18,55 +23,43 @@ const Navigation = () => {
     }
 
     return (
-        <nav className="bg-gray-800 py-4">
-            <div className="max-w-7xl mx-auto px-4">
-                <ul className="flex justify-between">
-                    <li>
-                        <Link to='/' className="text-white hover:text-gray-300">
+        <Navbar expand='lg' bg='dark' data-bs-theme='dark'>
+            <Container>
+                <Navbar.Brand href='#home'>React-Bootstrap</Navbar.Brand>
+                <Navbar.Toggle aria-controls='basic-navbar-nav' />
+                <Navbar.Collapse id='basic-navbar-nav'>
+                    <Nav className='me-auto'>
+                        <Nav.Link as={Link} to='/'>
                             Home
-                        </Link>
-                    </li>
-                    {user && (
-                        <>
-                            <li>
-                                <Link to='/create' className="text-white hover:text-gray-300">
+                        </Nav.Link>
+                        { user ? (
+                            <>
+                                <Nav.Link as={Link} to='/'>
                                     Create
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='/dashboard' className="text-white hover:text-gray-300">
-                                    Dashboard
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to='/logout'
-                                    className="text-white hover:text-gray-300"
-                                    onClick={handleOnLogout}
-                                >
-                                    Logout
-                                </Link>
-                            </li>
-                        </>
-                        
-                    )}
-                    {!user && (
-                        <>
-                            <li>
-                                <Link to='/login' className="text-white hover:text-gray-300">
+                                </Nav.Link>
+                                <NavDropdown title='User' id='basic-nav-dropdown'>
+                                    <NavDropdown.Item as={Link} to='/dashboard'>
+                                        Dashboard
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item onClick={handleOnLogout}>
+                                        Logout
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            </>
+                        ) : (
+                            <>
+                                <Nav.Link as={Link} to='/login'>
                                     Login
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='/register' className="text-white hover:text-gray-300">
+                                </Nav.Link>
+                                <Nav.Link as={Link} to='/register'>
                                     Register
-                                </Link>
-                            </li>
-                        </>
-                    )}
-                </ul>
-            </div>
-        </nav>
+                                </Nav.Link>
+                            </>
+                        )}
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     )
 }
 

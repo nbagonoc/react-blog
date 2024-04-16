@@ -4,7 +4,7 @@ import { getPosts, reset } from '../../../redux/posts/postsSlice'
 
 import PostDetails from './PostDetails'
 
-import Spinner from '../../partials/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
 
 const PostList = () => {
     const dispatch = useDispatch()
@@ -15,7 +15,7 @@ const PostList = () => {
     }, [dispatch])
 
     if (isLoading) {
-        return <Spinner/>
+        return <Spinner animation='border' variant='primary'/>
     }
 
     return (
