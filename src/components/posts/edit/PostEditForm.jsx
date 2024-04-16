@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { getPost, updatePost, reset } from '../../../redux/posts/postsSlice'
@@ -70,8 +70,19 @@ const PostEditForm = () => {
                     value={formData.content}
                     onChange={handleOnChange}
                     placeholder='Content'
-                ></textarea>
-                <button type='submit'>Edit</button>
+                />
+                <button
+                    className='btn btn-sm btn-secondary me-1'
+                    type='submit'
+                >
+                    Edit
+                </button>
+                <Link
+                    className='btn btn-sm btn-secondary'
+                    to='/dashboard'
+                >
+                    Cancel
+                </Link>
             </form>
         </div>
     )

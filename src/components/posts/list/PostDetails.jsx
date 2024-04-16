@@ -4,9 +4,10 @@ const PostDetails = ({ post }) => {
     return (
         <div>
             <Link to={`/view/${post._id}`} className='text-decoration-none'>
-                <h3 className='mb-0 text-capitalize'>{post.title}</h3>
+                <h5 className='mb-0 text-capitalize'>{post.title}</h5>
             </Link>
             <p>{post.content}</p>
+            <hr />
         </div>
     )
 }

@@ -16,8 +16,8 @@ const Dashboard = () => {
 
   return (
     <div>
-        <h2 className='mb-3'>Welcome to your dashboard, {user ? user.firstName : '' }</h2>
-        <h3>Your posts:</h3>
+        <h2 className='mb-3 text-primary'>Welcome to your dashboard, {user ? user.firstName : '' }</h2>
+        <h3 className='mb-3'>Here are your posts:</h3>
         <PostListByUser/>
     </div>
   )

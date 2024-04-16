@@ -12,24 +12,28 @@ const PostDetails = ({ post }) => {
 
     return (
         <div>
-            <Link to={`/view/${post._id}`} className='text-decoration-none'>
-                <h3 className='mb-0 text-capitalize'>{post.title}</h3>
-            </Link>
-            <p className='mb-1'>{post.content}</p>
+            <h5 className='mb-1 text-capitalize'>{post.title}</h5>
             <div className='action-container mb-3'>
                 <Link
+                    to={`/view/${post._id}`}
+                    className='btn btn-sm btn-secondary me-1'
+                >
+                    View
+                </Link>
+                <Link
                     to={`/edit/${post._id}`}
-                    className='btn btn-secondary me-1'
+                    className='btn btn-sm btn-secondary me-1'
                 >
                     Edit
                 </Link>
                 <button
-                    className='btn btn-secondary'
+                    className='btn btn-sm btn-secondary'
                     onClick={() => handleOnDelete(post._id)}
                 >
                     Delete
                 </button>
             </div>
+            <hr />
         </div>
     )
 }
