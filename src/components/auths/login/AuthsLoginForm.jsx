@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { login, reset } from '../../../redux/auths/authsSlice'
 
-import Spinner from '../../partials/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
 
 const AuthsLoginForm = () => {
     const dispatch = useDispatch()
@@ -34,7 +34,7 @@ const AuthsLoginForm = () => {
     }
 
     if (isLoading) {
-        return <Spinner/>
+        return <Spinner animation='border' variant='primary'/>
     }
 
     return (

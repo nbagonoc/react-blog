@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { createPost, reset } from '../../../redux/posts/postsSlice'
 
-import Spinner from '../../partials/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
 
 const PostCreateForm = () => {
     const dispatch = useDispatch()
@@ -34,7 +34,7 @@ const PostCreateForm = () => {
     }
 
     if (isLoading) {
-        return <Spinner/>
+        return <Spinner animation='border' variant='primary'/>
     }
 
     return (

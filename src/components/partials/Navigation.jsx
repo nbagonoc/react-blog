@@ -34,7 +34,7 @@ const Navigation = () => {
                         </Nav.Link>
                         { user ? (
                             <>
-                                <Nav.Link as={Link} to='/'>
+                                <Nav.Link as={Link} to='/create'>
                                     Create
                                 </Nav.Link>
                                 <NavDropdown title='User' id='basic-nav-dropdown'>

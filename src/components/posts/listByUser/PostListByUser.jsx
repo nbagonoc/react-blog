@@ -1,13 +1,11 @@
 import { useEffect } from 'react'
-// import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getPostsByUser, reset } from '../../../redux/posts/postsSlice'
 
 import PostDetails from './PostDetails'
-import Spinner from '../../partials/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
 
 const PostListByUser = () => {
-    // const { id  }  = useParams()
     const dispatch = useDispatch()
     const { posts, postsByUser, isLoading, isError, isSuccess, message } = useSelector((state) => state.posts)
     const { user } = useSelector((state) => state.auths)
@@ -17,7 +15,7 @@ const PostListByUser = () => {
     }, [dispatch, user])
 
     if (isLoading) {
-        return <Spinner/>
+        return <Spinner animation='border' variant='primary'/>
     }
 
     return (

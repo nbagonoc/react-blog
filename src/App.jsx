@@ -19,30 +19,32 @@ function App() {
     return (
         <BrowserRouter>
             <Navigation />
-            <Routes>
-                <Route path='/' element={<Home />} />
-                <Route
-                    path='/create'
-                    element={user ? <Create /> : <Navigate to='/login' />}
-                />
-                <Route
-                    path='/edit/:id'
-                    element={user ? <Edit /> : <Navigate to='/login' />}
-                />
-                <Route path='/view/:id' element={<View />} />
-                <Route
-                    path='/login'
-                    element={user ? <Navigate to='/dashboard' /> : <Login />}
-                />
-                <Route
-                    path='/register'
-                    element={user ? <Navigate to='/dashboard' /> : <Register />}
-                />
-                <Route
-                    path='/dashboard'
-                    element={user ? <Dashboard /> : <Navigate to='/login' />}
-                />
-            </Routes>
+            <div className="container mt-3">
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route
+                        path='/create'
+                        element={user ? <Create /> : <Navigate to='/login' />}
+                    />
+                    <Route
+                        path='/edit/:id'
+                        element={user ? <Edit /> : <Navigate to='/login' />}
+                    />
+                    <Route path='/view/:id' element={<View />} />
+                    <Route
+                        path='/login'
+                        element={user ? <Navigate to='/dashboard' /> : <Login />}
+                    />
+                    <Route
+                        path='/register'
+                        element={user ? <Navigate to='/dashboard' /> : <Register />}
+                    />
+                    <Route
+                        path='/dashboard'
+                        element={user ? <Dashboard /> : <Navigate to='/login' />}
+                    />
+                </Routes>
+            </div>
         </BrowserRouter>
     )
 }

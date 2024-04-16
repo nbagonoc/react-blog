@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { getPost, updatePost, reset } from '../../../redux/posts/postsSlice'
 
-import Spinner from '../../partials/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
 
 const PostEditForm = () => {
     const navigate = useNavigate()
@@ -52,7 +52,7 @@ const PostEditForm = () => {
     }
 
     if (isLoading) {
-        return <Spinner/>
+        return <Spinner animation='border' variant='primary'/>
     }
 
     return (

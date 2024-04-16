@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { getPost } from '../../../redux/posts/postsSlice'
 
-import Spinner from '../../partials/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
 
 const PostSingle = () => {
     const { id  }  = useParams()
@@ -16,7 +16,7 @@ const PostSingle = () => {
     }, [dispatch, id])
 
     if (isLoading) {
-        return <Spinner/>
+        return <Spinner animation='border' variant='primary'/>
     }
 
     return (

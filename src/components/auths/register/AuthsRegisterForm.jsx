@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { register, reset } from '../../../redux/auths/authsSlice'
 
-import Spinner from '../../partials/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
 
 const AuthsRegisterForm = () => {
     const navigate = useNavigate()
@@ -38,7 +38,7 @@ const AuthsRegisterForm = () => {
     }
 
     if (isLoading) {
-        return <Spinner/>
+        return <Spinner animation='border' variant='primary'/>
     }
 
     return (
