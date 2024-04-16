@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { getPost } from '../../../redux/posts/postsSlice'
 
+import Spinner from '../../partials/Spinner'
+
 const PostSingle = () => {
     const { id  }  = useParams()
     const dispatch = useDispatch()
@@ -12,6 +14,10 @@ const PostSingle = () => {
     useEffect(() => {
         dispatch(getPost(id))
     }, [dispatch, id])
+
+    if (isLoading) {
+        return <Spinner/>
+    }
 
     return (
         <div>

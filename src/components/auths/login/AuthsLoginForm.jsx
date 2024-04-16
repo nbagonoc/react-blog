@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { login, reset } from '../../../redux/auths/authsSlice'
 
+import Spinner from '../../partials/Spinner'
+
 const AuthsLoginForm = () => {
     const dispatch = useDispatch()
-    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auths)
+    const { user, isLoading, isError, isSuccess, message } = useSelector(state => state.auths)
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -31,27 +33,31 @@ const AuthsLoginForm = () => {
         dispatch(login(loginData))
     }
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleOnChange}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleOnChange}
-          placeholder="Password"
-        />
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  )
+    if (isLoading) {
+        return <Spinner/>
+    }
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type='email'
+                    name='email'
+                    value={formData.email}
+                    onChange={handleOnChange}
+                    placeholder='Email'
+                />
+                <input
+                    type='password'
+                    name='password'
+                    value={formData.password}
+                    onChange={handleOnChange}
+                    placeholder='Password'
+                />
+                <button type='submit'>Login</button>
+            </form>
+        </div>
+    )
 }
 
 export default AuthsLoginForm

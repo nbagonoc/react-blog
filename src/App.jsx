@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import Navigation from './components/navigation/Navigation'
+import Navigation from './components/partials/Navigation'
 
 import Home from './pages/Home'
 import Create from './pages/Create'
@@ -34,7 +34,10 @@ function App() {
                     path='/login'
                     element={user ? <Navigate to='/dashboard' /> : <Login />}
                 />
-                <Route path='/register' element={<Register />} />
+                <Route
+                    path='/register'
+                    element={user ? <Navigate to='/dashboard' /> : <Register />}
+                />
                 <Route
                     path='/dashboard'
                     element={user ? <Dashboard /> : <Navigate to='/login' />}

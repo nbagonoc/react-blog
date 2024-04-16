@@ -4,6 +4,8 @@ import { getPosts, reset } from '../../../redux/posts/postsSlice'
 
 import PostDetails from './PostDetails'
 
+import Spinner from '../../partials/Spinner'
+
 const PostList = () => {
     const dispatch = useDispatch()
     const { posts, isLoading, isError, isSuccess, message } = useSelector((state) => state.posts)
@@ -11,6 +13,11 @@ const PostList = () => {
     useEffect(() => {
         dispatch(getPosts())
     }, [dispatch])
+
+    if (isLoading) {
+        return <Spinner/>
+    }
+
     return (
         <div>
             { posts?.map((post, index) => (

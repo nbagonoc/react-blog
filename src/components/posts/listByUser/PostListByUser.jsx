@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getPostsByUser, reset } from '../../../redux/posts/postsSlice'
 
 import PostDetails from './PostDetails'
+import Spinner from '../../partials/Spinner'
 
 const PostListByUser = () => {
     // const { id  }  = useParams()
@@ -14,6 +15,10 @@ const PostListByUser = () => {
     useEffect(() => {
         dispatch(getPostsByUser(user.id))
     }, [dispatch, user])
+
+    if (isLoading) {
+        return <Spinner/>
+    }
 
     return (
         <div>

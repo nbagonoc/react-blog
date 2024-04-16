@@ -1,11 +1,15 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { register } from '../../../redux/auths/authsSlice'
+import { register, reset } from '../../../redux/auths/authsSlice'
+
+import Spinner from '../../partials/Spinner'
 
 const AuthsRegisterForm = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { isLoading, isError, isSuccess, message } = useSelector((state) => state.auths)
+    const { isLoading, isError, isSuccess, message } = useSelector(state => state.auths)
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',
@@ -33,48 +37,52 @@ const AuthsRegisterForm = () => {
         dispatch(register(registerData))
     }
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleOnChange}
-          placeholder="First Name"
-        />
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleOnChange}
-          placeholder="Last Name"
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleOnChange}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleOnChange}
-          placeholder="Password"
-        />
-        <input
-          type="password"
-          name="password2"
-          value={formData.password2}
-          onChange={handleOnChange}
-          placeholder="Confirm Password"
-        />
-        <button type="submit">Register</button>
-      </form>
-    </div>
-  )
+    if (isLoading) {
+        return <Spinner/>
+    }
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type='text'
+                    name='firstName'
+                    value={formData.firstName}
+                    onChange={handleOnChange}
+                    placeholder='First Name'
+                />
+                <input
+                    type='text'
+                    name='lastName'
+                    value={formData.lastName}
+                    onChange={handleOnChange}
+                    placeholder='Last Name'
+                />
+                <input
+                    type='email'
+                    name='email'
+                    value={formData.email}
+                    onChange={handleOnChange}
+                    placeholder='Email'
+                />
+                <input
+                    type='password'
+                    name='password'
+                    value={formData.password}
+                    onChange={handleOnChange}
+                    placeholder='Password'
+                />
+                <input
+                    type='password'
+                    name='password2'
+                    value={formData.password2}
+                    onChange={handleOnChange}
+                    placeholder='Confirm Password'
+                />
+                <button type='submit'>Register</button>
+            </form>
+        </div>
+    )
 }
 
 export default AuthsRegisterForm

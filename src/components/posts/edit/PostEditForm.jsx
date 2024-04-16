@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { getPost, updatePost, reset } from '../../../redux/posts/postsSlice'
 
+import Spinner from '../../partials/Spinner'
+
 const PostEditForm = () => {
     const navigate = useNavigate()
-    const { id  }  = useParams()
+    const { id } = useParams()
     const dispatch = useDispatch()
-    const { post, isLoading, isError, isSuccess, message } = useSelector((state) => state.posts)
+    const { post, isLoading, isError, isSuccess, message } = useSelector(state => state.posts)
     const [formData, setFormData] = useState({
         title: '',
         content: '',
@@ -42,35 +44,37 @@ const PostEditForm = () => {
         }
 
         try {
-            dispatch(updatePost({id, data}))
+            dispatch(updatePost({ id, data }))
             navigate('/dashboard')
         } catch (error) {
             console.log(error)
         }
-
-
     }
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleOnChange}
-          placeholder="Title"
-        />
-        <textarea
-          name="content"
-          value={formData.content}
-          onChange={handleOnChange}
-          placeholder="Content"
-        ></textarea>
-        <button type="submit">Edit</button>
-      </form>
-    </div>
-  )
+    if (isLoading) {
+        return <Spinner/>
+    }
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type='text'
+                    name='title'
+                    value={formData.title}
+                    onChange={handleOnChange}
+                    placeholder='Title'
+                />
+                <textarea
+                    name='content'
+                    value={formData.content}
+                    onChange={handleOnChange}
+                    placeholder='Content'
+                ></textarea>
+                <button type='submit'>Edit</button>
+            </form>
+        </div>
+    )
 }
 
 export default PostEditForm
