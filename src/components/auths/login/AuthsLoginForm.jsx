@@ -27,13 +27,9 @@ const AuthsLoginForm = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleOnSubmit = (e) => {
         e.preventDefault()
-        const loginData = {
-            email: formData.email,
-            password: formData.password,
-        }
-        dispatch(login(loginData))
+        dispatch(login(formData))
     }
 
     if (isLoading) {
@@ -42,7 +38,7 @@ const AuthsLoginForm = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleOnSubmit}>
                 <label htmlFor='email' className='form-label'>
                     Email:
                 </label>

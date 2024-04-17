@@ -11,8 +11,8 @@ const AuthsRegisterForm = () => {
     const dispatch = useDispatch()
     const { isLoading, isError, isSuccess, message } = useSelector(state => state.auths)
     const [formData, setFormData] = useState({
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
         password2: '',
@@ -25,16 +25,12 @@ const AuthsRegisterForm = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleOnSubmit = (e) => {
         e.preventDefault()
-        const registerData = {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            password: formData.password,
-            password2: formData.password2,
+        dispatch(register(formData))
+        if (isSuccess) {
+            navigate('/login')
         }
-        dispatch(register(registerData))
     }
 
     if (isLoading) {
@@ -43,7 +39,7 @@ const AuthsRegisterForm = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleOnSubmit}>
                 <div className='mb-3'>
                     <label htmlFor='firstName' className='form-label'>
                         Firstname:
