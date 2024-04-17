@@ -36,7 +36,7 @@ const PostEditForm = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleOnSubmit = (e) => {
         e.preventDefault()
         const data = {
             title: formData.title,
@@ -57,20 +57,33 @@ const PostEditForm = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    name='title'
-                    value={formData.title}
-                    onChange={handleOnChange}
-                    placeholder='Title'
-                />
-                <textarea
-                    name='content'
-                    value={formData.content}
-                    onChange={handleOnChange}
-                    placeholder='Content'
-                />
+            <form onSubmit={handleOnSubmit}>
+                <div>
+                    <label htmlFor='title' className='form-label'>
+                        Title:
+                    </label>
+                    <input
+                        type='text'
+                        name='title'
+                        value={formData.title}
+                        onChange={handleOnChange}
+                        placeholder='Title'
+                        className='form-control mb-3'
+                    />
+                </div>
+                <div>
+                    <label htmlFor='content' className='form-label'>
+                        Content:
+                    </label>
+                    <textarea
+                        name='content'
+                        value={formData.content}
+                        onChange={handleOnChange}
+                        placeholder='Content'
+                        className='form-control mb-3'
+                        rows='15'
+                    />
+                </div>
                 <button
                     className='btn btn-sm btn-secondary me-1'
                     type='submit'

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { createPost, reset } from '../../../redux/posts/postsSlice'
 
@@ -20,7 +21,7 @@ const PostCreateForm = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleOnSubmit = (e) => {
         e.preventDefault()
         const postData = {
             title: formData.title,
@@ -39,21 +40,45 @@ const PostCreateForm = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    name='title'
-                    value={formData.title}
-                    onChange={handleOnChange}
-                    placeholder='Title'
-                />
-                <textarea
-                    name='content'
-                    value={formData.content}
-                    onChange={handleOnChange}
-                    placeholder='Content'
-                ></textarea>
-                <button type='submit'>Create</button>
+            <form onSubmit={handleOnSubmit}>
+                <div>
+                    <label htmlFor='title' className='form-label'>
+                        Title:
+                    </label>
+                    <input
+                        type='text'
+                        name='title'
+                        value={formData.title}
+                        onChange={handleOnChange}
+                        placeholder='Title'
+                        className='form-control mb-3'
+                    />
+                </div>
+                <div>
+                    <label htmlFor='content' className='form-label'>
+                        Content:
+                    </label>
+                    <textarea
+                        name='content'
+                        value={formData.content}
+                        onChange={handleOnChange}
+                        placeholder='Content'
+                        className='form-control mb-3'
+                        rows='15'
+                    />
+                </div>
+                <button
+                    className='btn btn-sm btn-secondary me-1'
+                    type='submit'
+                >
+                    Edit
+                </button>
+                <Link
+                    className='btn btn-sm btn-secondary'
+                    to='/dashboard'
+                >
+                    Cancel
+                </Link>
             </form>
         </div>
     )
