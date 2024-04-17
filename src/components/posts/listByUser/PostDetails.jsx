@@ -10,9 +10,14 @@ const PostDetails = ({ post }) => {
         dispatch(deletePost(id))
     }
 
+    if(!post) {
+        return null
+    }
+
     return (
         <div>
-            <h5 className='mb-1 text-capitalize'>{post.title}</h5>
+            <h5 className='mb-0 text-capitalize'>{post.title}</h5>
+            <p className='mb-2 text-muted'>{new Date(post.created).toLocaleString()}</p>
             <div className='action-container mb-3'>
                 <Link
                     to={`/view/${post._id}`}
