@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { register, reset } from '../../../redux/auths/authsSlice'
@@ -44,42 +44,80 @@ const AuthsRegisterForm = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    name='firstName'
-                    value={formData.firstName}
-                    onChange={handleOnChange}
-                    placeholder='First Name'
-                />
-                <input
-                    type='text'
-                    name='lastName'
-                    value={formData.lastName}
-                    onChange={handleOnChange}
-                    placeholder='Last Name'
-                />
-                <input
-                    type='email'
-                    name='email'
-                    value={formData.email}
-                    onChange={handleOnChange}
-                    placeholder='Email'
-                />
-                <input
-                    type='password'
-                    name='password'
-                    value={formData.password}
-                    onChange={handleOnChange}
-                    placeholder='Password'
-                />
-                <input
-                    type='password'
-                    name='password2'
-                    value={formData.password2}
-                    onChange={handleOnChange}
-                    placeholder='Confirm Password'
-                />
-                <button type='submit'>Register</button>
+                <div className='mb-3'>
+                    <label htmlFor='firstName' className='form-label'>
+                        Firstname:
+                    </label>
+                    <input
+                        type='text'
+                        name='firstName'
+                        value={formData.firstName}
+                        onChange={handleOnChange}
+                        placeholder='First Name'
+                        className='form-control'
+                    />
+                </div>
+                <div className='mb-3'>
+                    <label htmlFor='lastName' className='form-label'>
+                        Lastname:
+                    </label>
+                    <input
+                        type='text'
+                        name='lastName'
+                        value={formData.lastName}
+                        onChange={handleOnChange}
+                        placeholder='Last Name'
+                        className='form-control'
+                    />
+                </div>
+                <div className='mb-3'>
+                    <label htmlFor='email' className='form-label'>
+                        Email:
+                    </label>
+                    <input
+                        type='email'
+                        name='email'
+                        value={formData.email}
+                        onChange={handleOnChange}
+                        placeholder='Email'
+                        className='form-control'
+                    />
+                </div>
+                <div className='mb-3'>
+                    <label htmlFor='password' className='form-label'>
+                        Password:
+                    </label>
+                    <input
+                        type='password'
+                        name='password'
+                        value={formData.password}
+                        onChange={handleOnChange}
+                        placeholder='Password'
+                        className='form-control'
+                    />
+                </div>
+                <div className='mb-3'>
+                    <label htmlFor='password2' className='form-label'>
+                        Conform Password:
+                    </label>
+                    <input
+                        type='password'
+                        name='password2'
+                        value={formData.password2}
+                        onChange={handleOnChange}
+                        placeholder='Confirm Password'
+                        className='form-control'
+                    />
+                </div>
+                <div className="d-grid mb-2">
+                    <button
+                        className='btn btn-primary full-width'
+                        type='submit'
+                    >
+                        Register
+                    </button>
+                </div>
+                <p className='text-center'>Already registered? <Link className='' to='/login'>Login here</Link></p>
             </form>
         </div>
     )

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { getPostsByUser, reset } from '../../../redux/posts/postsSlice'
 
 import PostDetails from './PostDetails'
@@ -16,6 +17,12 @@ const PostListByUser = () => {
 
     if (isLoading) {
         return <Spinner animation='border' variant='primary'/>
+    }
+
+    if (postsByUser.length === 0) {
+        return (
+            <p>You have no posts. {<Link to='/create'>Create one now!</Link>}</p>
+        )
     }
 
     return (

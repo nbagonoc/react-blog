@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { login, reset } from '../../../redux/auths/authsSlice'
 
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from 'react-bootstrap/Spinner'
 
 const AuthsLoginForm = () => {
     const dispatch = useDispatch()
-    const { user, isLoading, isError, isSuccess, message } = useSelector(state => state.auths)
+    const { user, isLoading, isError, isSuccess, message } = useSelector(
+        (state) => state.auths
+    )
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -34,27 +37,43 @@ const AuthsLoginForm = () => {
     }
 
     if (isLoading) {
-        return <Spinner animation='border' variant='primary'/>
+        return <Spinner animation='border' variant='primary' />
     }
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                <label htmlFor='email' className='form-label'>
+                    Email:
+                </label>
                 <input
                     type='email'
                     name='email'
                     value={formData.email}
                     onChange={handleOnChange}
                     placeholder='Email'
+                    className='form-control mb-3'
                 />
+                <label htmlFor='password' className='form-label'>
+                    Password:
+                </label>
                 <input
                     type='password'
                     name='password'
                     value={formData.password}
                     onChange={handleOnChange}
                     placeholder='Password'
+                    className='form-control mb-3'
                 />
-                <button type='submit'>Login</button>
+                <div className="d-grid mb-2">
+                    <button
+                        className='btn btn-primary full-width'
+                        type='submit'
+                    >
+                        Login
+                    </button>
+                </div>
+                <p className='text-center'>Not yet registered? <Link className='' to='/register'>Register here</Link></p>
             </form>
         </div>
     )

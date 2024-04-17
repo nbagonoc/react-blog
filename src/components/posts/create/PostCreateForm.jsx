@@ -71,7 +71,7 @@ const PostCreateForm = () => {
                     className='btn btn-sm btn-secondary me-1'
                     type='submit'
                 >
-                    Edit
+                    Create
                 </button>
                 <Link
                     className='btn btn-sm btn-secondary'
