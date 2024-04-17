@@ -68,7 +68,7 @@ const PostCreateForm = () => {
                     />
                 </div>
                 <button
-                    className='btn btn-sm btn-secondary me-1'
+                    className='btn btn-sm btn-primary me-1'
                     type='submit'
                 >
                     Create

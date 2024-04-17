@@ -1,2 +1,24 @@
-Need to:
-- Add Styling via bootstrap
+## React Blog
+
+A simple Blog site powerd by React. This is the frontend, while the backend is: restful-node-multi-user (link the github repo here)
+
+## Features:
+- Registration
+- Login
+- Create blog post
+- View yours, and others blog post
+- Update your blog post
+- Delete your blog post
+
+## How to run locally:
+
+- Download dependencies:
+```
+npm install
+```
+
+- Serve by running:
+```
+npm run dev
+npm run test
+```
