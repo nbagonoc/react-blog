@@ -23,8 +23,10 @@ const PostSingle = () => {
         <div>
             { post && (
                 <div>
-                    <h1 className='text-capitalize'>{post.title}</h1>
-                    <p>{post.content}</p>
+                    <h1 className='text-capitalize mb-0'>{post.title}</h1>
+                    <p className='mb-0 text-muted'>{ post.user ? post.user.firstName : ''} {post.user ? post.user.lastName: ''}</p>
+                    <span className='text-muted'>{new Date(post.created).toLocaleString()}</span>
+                    <p className='mt-2'>{post.content}</p>
                 </div>
             )}
         </div>
