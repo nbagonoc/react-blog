@@ -25,8 +25,16 @@ export const createPost = createAsyncThunk('posts/createPost', async (req, thunk
         const state = thunkAPI.getState()
         const newPost = response
 
+        // spread operator and concat is the best approach
         thunkAPI.dispatch(setPosts([...state.posts.posts, newPost]))
+        // thunkAPI.dispatch(setPosts(state.posts.posts.concat(newPost))) //this works as well
+        // thunkAPI.dispatch(setPosts(state.posts.posts.push(newPost))) //this does not work since push modifies the original array
+        // thunkAPI.dispatch(setPosts(state.posts.posts.unshift(newPost))) //this does not work since unshift modifies the original array
+
         thunkAPI.dispatch(setPostsByUser([...state.posts.postsByUser, newPost]))
+        // thunkAPI.dispatch(setPostsByUser(state.posts.postsByUser.concat(newPost))) //this works as well
+        // thunkAPI.dispatch(setPostsByUser(state.posts.postsByUser.push(newPost))) //this does not work since push modifies the original array
+        // thunkAPI.dispatch(setPostsByUser(state.posts.postsByUser.unshift(newPost))) //this does not work since unshift modifies the original array
 
         return 'Post created successfully'
     } catch (error) {
@@ -84,10 +92,13 @@ export const deletePost = createAsyncThunk('posts/deletePost', async (id, thunkA
     try {
         await postService.deletePost(id)
         const state = thunkAPI.getState()
+
+        // filter() is the best approach
         const updatedPostsByUser = state.posts.postsByUser.filter(post => post._id !== id)
         const updatedPosts = state.posts.posts.filter(post => post._id !== id)
         thunkAPI.dispatch(setPostsByUser(updatedPostsByUser))
         thunkAPI.dispatch(setPosts(updatedPosts))
+
         return 'Post deleted successfully'
     } catch (error) {
         const message = error
