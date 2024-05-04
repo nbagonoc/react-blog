@@ -25,6 +25,13 @@ export const createPost = createAsyncThunk('posts/createPost', async (req, thunk
         const state = thunkAPI.getState()
         const newPost = response
 
+        // experiment w/o db
+        // const newPost = {
+        //     title: req.title,
+        //     content: req.content,
+        // }
+
+
         // spread operator and concat is the best approach
         thunkAPI.dispatch(setPosts([...state.posts.posts, newPost]))
         // thunkAPI.dispatch(setPosts(state.posts.posts.concat(newPost))) //this works as well
