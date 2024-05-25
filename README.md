@@ -1,6 +1,6 @@
 ## React Blog
 
-A simple Blog site powerd by React. This is the frontend, while the backend is: restful-node-multi-user (link the github repo here)
+A simple Blog site powerd by React. This is the frontend, while the backend is: restful-node-multi-user (https://github.com/nbagonoc/RESTful-node-multi-auth)
 
 ## Features:
 - Registration
