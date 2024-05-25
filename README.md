@@ -22,3 +22,11 @@ npm install
 npm run dev
 npm run test
 ```
+
+## How to run via docker:
+
+- Download dependencies:
+```
+docker build -t react-blog .
+docker run -d -p 8080:8080 react-blog
+```
