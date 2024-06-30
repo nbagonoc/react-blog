@@ -24,14 +24,14 @@ const Search = () => {
         >
             <input
                 type='text'
-                placeholder='Search employees'
+                placeholder='Search...'
                 className='search-input form-control me-2'
                 value={queryFilter}
                 onChange={handleOnChange}
             />
             <button
                 type='submit'
-                className='btn btn-success'
+                className='btn btn-primary'
             >
                 Search
             </button>
