@@ -11,15 +11,14 @@ const Search = () => {
         setQueryFilter(e.target.value)
     }
 
-    const handleSubmit = (e) => {
+    const handleOnSubmit = (e) => {
         e.preventDefault()
-
         dispatch(searchPosts(queryFilter))
     }
 
     return (
         <form
-            onSubmit={handleSubmit}
+            onSubmit={handleOnSubmit}
             className='d-flex mb-3'
         >
             <input
