@@ -13,6 +13,21 @@ const getPosts = async () => {
     }
 }
 
+const searchPosts = async (searchQuery) => {
+    try {
+        const response = await axios.get(`${postsAPI}/search`, {
+            params: {
+                page: 1,
+                limit: 3,
+                query: searchQuery
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 const getPostsByUserId = async (id) => {
     try {
         const response = await axios.get(`${postsAPI}/user/${id}`)
@@ -72,6 +87,7 @@ const deletePost = async (id) => {
 
 const postService = {
     getPosts,
+    searchPosts,
     getPostsByUserId,
     getPost,
     createPost,

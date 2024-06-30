@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getPosts, reset } from '../../../redux/posts/postsSlice'
 
 import PostDetails from './PostDetails'
+import Search from '../search/Search'
 
 import Spinner from 'react-bootstrap/Spinner';
 
@@ -20,6 +21,7 @@ const PostList = () => {
 
     return (
         <div>
+            <Search />
             { posts?.map((post, index) => (
                 <PostDetails key={index} post={post} />
             ))}

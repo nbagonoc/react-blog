@@ -11,6 +11,10 @@ const initialState = {
     message: ''
 }
 
+export const searchPosts = createAsyncThunk('posts/searchPosts', async (searchQuery) => {
+    return await postService.searchPosts(searchQuery)
+})
+
 export const getPosts = createAsyncThunk('posts/getPosts', async () => {
     return await postService.getPosts()
 })
@@ -135,6 +139,7 @@ const postsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            // GET POSTS
             .addCase(getPosts.pending, (state) => {
                 state.isLoading = true
             })
@@ -148,6 +153,21 @@ const postsSlice = createSlice({
                 state.isError = true
                 state.message = action.payload.message
             })
+            // SEARCH POSTS
+            .addCase(searchPosts.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(searchPosts.fulfilled, (state, action) => {
+                state.posts = action.payload
+                state.isLoading = false
+                state.isSuccess = true
+            })
+            .addCase(searchPosts.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload.message
+            })
+            // GET POSTS BY USER
             .addCase(getPostsByUser.pending, (state) => {
                 state.isLoading = true
             })
@@ -161,6 +181,7 @@ const postsSlice = createSlice({
                 state.isError = true
                 state.message = action.payload.message
             })
+            // GET POST BY ID
             .addCase(getPost.pending, (state) => {
                 state.isLoading = true
             })
@@ -176,6 +197,7 @@ const postsSlice = createSlice({
                 state.isError = true
                 state.message = action.payload.message
             })
+            // CREATE POST
             .addCase(createPost.pending, (state) => {
                 state.isLoading = true
             })
@@ -189,6 +211,7 @@ const postsSlice = createSlice({
                 state.isError = true
                 state.message = action.payload.message
             })
+            // UPDATE POST
             .addCase(updatePost.pending, (state) => {
                 state.isLoading = true
             })
@@ -202,6 +225,7 @@ const postsSlice = createSlice({
                 state.isError = true
                 state.message = action.payload.message
             })
+            // DELETE POST
             .addCase(deletePost.pending, (state) => {
                 state.isLoading = true
             })
