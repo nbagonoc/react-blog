@@ -15,7 +15,7 @@ const PostDetails = ({ post }) => {
     }
 
     return (
-        <div>
+        <div className='border-top pt-3'>
             <h5 className='mb-0 text-capitalize'>{post.title}</h5>
             <p className='mb-2 text-muted'>{new Date(post.created).toLocaleString()}</p>
             <div className='action-container mb-3'>
@@ -38,7 +38,6 @@ const PostDetails = ({ post }) => {
                     Delete
                 </button>
             </div>
-            <hr />
         </div>
     )
 }

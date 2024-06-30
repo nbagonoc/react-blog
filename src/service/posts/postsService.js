@@ -18,7 +18,7 @@ const searchPosts = async (searchQuery) => {
         const response = await axios.get(`${postsAPI}/search`, {
             params: {
                 page: 1,
-                limit: 3,
+                limit: 5,
                 query: searchQuery
             }
         });

@@ -18,22 +18,24 @@ const Search = () => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    placeholder='Search employees'
-                    className='search-input'
-                    value={queryFilter}
-                    onChange={handleOnChange}
-                />
-                <button
-                    type='submit'
-                >
-                    Search
-                </button>
-            </form>
-        </div>
+        <form
+            onSubmit={handleSubmit}
+            className='d-flex mb-3'
+        >
+            <input
+                type='text'
+                placeholder='Search employees'
+                className='search-input form-control me-2'
+                value={queryFilter}
+                onChange={handleOnChange}
+            />
+            <button
+                type='submit'
+                className='btn btn-success'
+            >
+                Search
+            </button>
+        </form>
     )
 }
 
